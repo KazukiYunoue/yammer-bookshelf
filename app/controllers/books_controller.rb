@@ -4,9 +4,12 @@ class BooksController < ApplicationController
   def index
     unless params[:user_id].blank?
       @user = User.find(params[:user_id])
-      @books = @user.books
+      @books = []
+      @user.bookmarks.order("created_at desc").each do |bookmark|
+        @books << Book.find(bookmark.book_id)
+      end
     else
-      @books = Book.all
+      @books = Book.all.sort {|a, b| b.users.count <=> a.users.count }
     end
 
     @current_user_books = current_user.books
@@ -21,7 +24,10 @@ class BooksController < ApplicationController
   # GET /books/1.xml
   def show
     @book = Book.find(params[:id])
-    @users = @book.users
+    @users = []
+    @book.bookmarks.order("created_at desc").each do |bookmark|
+      @users << User.find(bookmark.user_id)
+    end
 
     respond_to do |format|
       format.html # show.html.erb

@@ -47,12 +47,12 @@
           <%= link_to "BookShelf", :root, :class => "brand" %>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "All Books", books_path  %></li>
+              <li><%= link_to "All books", books_path  %></li>
+              <li><%= link_to "Your books", books_path(:user_id => current_user.id) %></li>
               <li><%= link_to "About"  %></li>
               <li>
                 <% if current_user %>
-                  <%= link_to "Welcome, #{current_user.nickname}! ", books_path(:user_id => current_user.id) %></li>
-                  <li><%= image_tag current_user.image, :size => "30x30" %><li>
+                  <%= image_tag current_user.image, :size => "30x30" %><li>
                   <li><%= link_to "Sign out.", signout_path  %>
                 <% end %>
                 <%= link_to "Sign in with Yammer.", "/auth/yammer" unless current_user %>
