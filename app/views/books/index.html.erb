@@ -1,9 +1,7 @@
 <div class="hero-unit">
   <% if @user %>
-    <h1>
-      <%= image_tag(@user.image, :size => "150x150") %>
-      <%= "#{@user.nickname}'s books" %>
-    </h1>
+    <h1><%= image_tag(@user.image, :size => "150x150") %>
+    <%= "#{@user.nickname}'s books" %></h1>
   <% else %>
     <h1><%= "All books" %></h1>
   <% end %>
@@ -20,8 +18,11 @@
   <div class="row-fluid">
     <% fourbooks.each do |book| %>
       <div class="span3">
-        <div class="hero-unit">
-          <h3><%= link_to book.isbn, book %></h3><br />
+        <div class="well">
+          <div class="thumbnail">
+            <%= link_to image_tag(book.image_url), book %>
+          </div>
+          <br />
           <% if @current_user_books.include? book %>
             <%= link_to('I lost it.', bookmarks_path(:book_id => book.id), :method => :delete, :class => "btn-danger") %>
           <% else %>

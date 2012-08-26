@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20120616030354) do
   end
 
   create_table "books", :force => true do |t|
-    t.string   "isbn"
+    t.string   "asin"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

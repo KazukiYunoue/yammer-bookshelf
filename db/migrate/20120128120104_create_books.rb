@@ -1,7 +1,7 @@
 class CreateBooks < ActiveRecord::Migration
   def self.up
     create_table :books do |t|
-      t.string :isbn, :unique => true
+      t.string :asin, :unique => true
 
       t.timestamps
     end

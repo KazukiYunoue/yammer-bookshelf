@@ -1,6 +1,34 @@
-<div class="hero-unit">
-  <h1><%= "ISBN:#{@book.isbn}#" %></h1>
+<div class="row-fluid">
+  <div class="span3">
+    <div class="thumbnail">
+      <%= image_tag @book.image_url %>
+    </div>
+  </div>
+
+  <div class="span9">
+    <div class="well">
+      <h1><%= @book.title %></h1>
+    </div>
+    <h3><%= @book.author %></h3>
+    <h3><%= @book.label %></h3>
+    <h3><%= @book.formatted_price %></h3>
+    <h3><%= link_to "Amazon", @book.detail_page_url, :target=>["_blank"] %></h3>
+  </div>
 </div>
-<% @users.each do |user| %>
-  <%= link_to image_tag(user.image, :size => "50x50"), books_path(:user_id => user.id) %>
-<% end %>
+
+<br />
+
+<div class="row-fluid">
+  <div class="span8">
+      <p>Comments</p>
+  </div>
+
+  <div class="span4">
+    <div class="well">
+      <p>friends who has the book</p>
+      <% @users.each do |user| %>
+        <%= link_to image_tag(user.image, :size => "50x50"), books_path(:user_id => user.id) %>
+      <% end %>
+    </div>
+  </div>
+</div>

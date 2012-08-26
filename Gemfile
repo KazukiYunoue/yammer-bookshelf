@@ -26,6 +26,9 @@ gem "twitter-bootstrap-rails"
 gem 'omniauth'
 gem 'omniauth-yammer'
 
+# amazon ecs
+gem 'amazon-ecs'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
