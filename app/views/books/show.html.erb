@@ -1,0 +1,6 @@
+<div class="hero-unit">
+  <h1><%= "ISBN:#{@book.isbn}#" %></h1>
+</div>
+<% @users.each do |user| %>
+  <%= link_to image_tag(user.image, :size => "50x50"), books_path(:user_id => user.id) %>
+<% end %>

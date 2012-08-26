@@ -1,0 +1,11 @@
+<div id="header">
+  <div id="welcome">
+    <% if current_user %>
+      <%= image_tag current_user.image, :size => "30x30" %>
+      <%= "Welcome, #{current_user.nickname}! " %>
+      <%= link_to "My books", books_path(:user_id => current_user.id) %>
+      <%= link_to "Sign out.", signout_path %>
+    <% end %>
+    <%= link_to "Sign in with Yammer.", "/auth/yammer" unless current_user %>
+  </div>
+</div>
