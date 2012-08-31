@@ -3,7 +3,7 @@ class Amazon::Book
     Amazon::Ecs.item_lookup(asin, {:response_group => 'Medium', :sort => 'salesrank', :country => :jp}).items
   end
 
-  def self.find_by_term(terms)
+  def self.find_by_terms(terms)
     Amazon::Ecs.item_search(terms, {:response_group => 'Medium', :sort => 'salesrank', :country => :jp}).items
   end
 end

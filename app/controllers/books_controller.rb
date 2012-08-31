@@ -29,6 +29,8 @@ class BooksController < ApplicationController
       @users << User.find(bookmark.user_id)
     end
 
+    @current_user_books = current_user.books
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @book }

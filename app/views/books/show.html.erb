@@ -9,9 +9,14 @@
     <div class="well">
       <h1><%= simple_format @book.title %></h1>
     </div>
-    <h3><%= @book.author %></h3>
-    <h3><%= @book.label %></h3>
-    <h3><%= @book.formatted_price %></h3>
+    <% if @current_user_books.include? @book %>
+      <%= button_to('I lost it.', bookmarks_path(:book_id => @book.id), :method => :delete, :class => "btn-danger") %>
+    <% else %>
+      <%= button_to('I have it!', bookmarks_path(:book_id => @book.id), :method => :post, :class => "btn-success") %>
+    <% end %>
+    <h3><%= simple_format @book.author %></h3>
+    <h3><%= simple_format @book.label %></h3>
+    <h3><%= simple_format @book.formatted_price %></h3>
     <h3><%= link_to "Amazon", @book.detail_page_url, :target=>["_blank"] %></h3>
   </div>
 </div>

@@ -24,9 +24,9 @@
           </div>
           <br />
           <% if @current_user_books.include? book %>
-            <%= link_to('I lost it.', bookmarks_path(:book_id => book.id), :method => :delete, :class => "btn-danger") %>
+            <%= button_to('I lost it.', bookmarks_path(:book_id => book.id), :method => :delete, :class => "btn-danger") %>
           <% else %>
-            <%= link_to('I have it!', bookmarks_path(:book_id => book.id), :method => :post, :class => "btn-success") %>
+            <%= button_to('I have it!', bookmarks_path(:book_id => book.id), :method => :post, :class => "btn-success") %>
           <% end %><br />
           <% book.users.sample(5).each do |user| %>
             <%= link_to image_tag(user.image, :size => "20x20"), books_path(:user_id => user.id) %>
