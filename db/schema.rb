@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(:version => 20120616030354) do
 
   create_table "books", :force => true do |t|
     t.string   "asin"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "bookmarks_count", :default => 0
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -35,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20120616030354) do
     t.string   "location"
     t.string   "nickname"
     t.string   "urls"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "bookmarks_count", :default => 0
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
 end

@@ -1,6 +1,8 @@
 class Book < ActiveRecord::Base
   attr_accessible :asin
 
+  attr_accessor :terms
+
   validates :asin,
     :presence => true
 
@@ -29,5 +31,21 @@ class Book < ActiveRecord::Base
 
   def detail_page_url
     Amazon::Book.find_by_asin(self.asin).first.get("DetailPageURL")
+  end
+
+  def self.find_by_terms_on_amazon(terms)
+    return_books = []
+
+    amazon_books = Amazon::Book.find_by_terms(terms)
+    amazon_books.each do |amazon_book|
+      if book = Book.find_by_asin(amazon_book.get("ASIN"))
+        return_books << book
+      else
+        book = Book.create(:asin => amazon_book.get("ASIN"))
+        return_books << book
+      end
+    end
+
+    return return_books
   end
 end

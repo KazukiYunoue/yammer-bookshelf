@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :location
       t.string :nickname
       t.string :urls
+      t.integer :bookmarks_count, :default => 0
 
       t.timestamps
     end

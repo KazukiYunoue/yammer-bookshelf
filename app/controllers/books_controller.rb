@@ -1,15 +1,19 @@
 class BooksController < ApplicationController
+  before_filter :book, :only => ["index","show"]
+
   # GET /books
   # GET /books.xml
   def index
-    unless params[:user_id].blank?
+    if params[:user_id]
       @user = User.find(params[:user_id])
       @books = []
       @user.bookmarks.order("created_at desc").each do |bookmark|
         @books << Book.find(bookmark.book_id)
       end
+    elsif params[:terms]
+      @books = Book.find_by_terms_on_amazon(params[:terms])
     else
-      @books = Book.all.sort {|a, b| b.users.count <=> a.users.count }
+      @books = Book.where("bookmarks_count != 0").order("bookmarks_count desc")
     end
 
     @current_user_books = current_user.books
@@ -97,5 +101,11 @@ class BooksController < ApplicationController
       format.html { redirect_to(books_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def book
+    @book = Book.new
   end
 end
