@@ -13,7 +13,7 @@ class BooksController < ApplicationController
     elsif params[:terms]
       @books = Book.find_by_terms_on_amazon(params[:terms])
     else
-      @books = Book.where("bookmarks_count != 0").order("bookmarks_count desc")
+      @books = Book.where("bookmarks_count != 0").order("bookmarks_count desc, updated_at desc")
     end
 
     @current_user_books = current_user.books
