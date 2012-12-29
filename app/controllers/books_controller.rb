@@ -8,7 +8,7 @@ class BooksController < ApplicationController
       @user = User.find(params[:user_id])
       @books = @user.books.page params[:page]
     elsif params[:terms]
-      @books = Book.find_by_terms_on_amazon(params[:terms], "jp", params[:page]) 
+      @books = Book.where(:asin => Book.find_by_terms_on_amazon(params[:terms], "jp", params[:page])).page params[:page]
     else
       @books = Book.where("bookmarks_count != 0").
                     order("bookmarks_count desc, updated_at desc").

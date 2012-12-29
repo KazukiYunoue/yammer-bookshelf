@@ -36,18 +36,22 @@ class Book < ActiveRecord::Base
   end
 
   def self.find_by_terms_on_amazon(terms, country="jp", page=1)
-    return_books = []
+    amazon_books_ASINs = []
+
+    page ||= 1
 
     amazon_books = Amazon::Book.find_by_terms(terms, country, page.to_i)
+    p "amazon_books count is #{amazon_books.count}"
     amazon_books.each do |amazon_book|
-      if book = Book.find_by_asin(amazon_book.get("ASIN"))
-        return_books << book
-      else
-        book = Book.create(:asin => amazon_book.get("ASIN"))
-        return_books << book
+      unless Book.find_by_asin(amazon_book.get("ASIN"))
+        Book.create(:asin => amazon_book.get("ASIN"))
       end
+
+      p "amazon_book.get is #{amazon_book.get("ASIN")}"
+      amazon_books_ASINs << amazon_book.get("ASIN")
     end
 
-    return return_books
+    p "amazon_books_ASINs is #{amazon_books_ASINs}"
+    return amazon_books_ASINs
   end
 end
