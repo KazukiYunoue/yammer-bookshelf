@@ -1,4 +1,6 @@
 class Book < ActiveRecord::Base
+  paginates_per 8
+
   attr_accessible :asin
 
   attr_accessor :terms
@@ -33,10 +35,10 @@ class Book < ActiveRecord::Base
     Amazon::Book.find_by_asin(self.asin).first.get("DetailPageURL")
   end
 
-  def self.find_by_terms_on_amazon(terms)
+  def self.find_by_terms_on_amazon(terms, country="jp", page=1)
     return_books = []
 
-    amazon_books = Amazon::Book.find_by_terms(terms)
+    amazon_books = Amazon::Book.find_by_terms(terms, country, page.to_i)
     amazon_books.each do |amazon_book|
       if book = Book.find_by_asin(amazon_book.get("ASIN"))
         return_books << book

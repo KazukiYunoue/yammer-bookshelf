@@ -6,20 +6,20 @@ class BooksController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @books = []
-      @user.bookmarks.order("created_at desc").each do |bookmark|
-        @books << Book.find(bookmark.book_id)
-      end
+      @books = @user.books.page params[:page]
     elsif params[:terms]
-      @books = Book.find_by_terms_on_amazon(params[:terms])
+      @books = Book.find_by_terms_on_amazon(params[:terms], "jp", params[:page]) 
     else
-      @books = Book.where("bookmarks_count != 0").order("bookmarks_count desc, updated_at desc")
+      @books = Book.where("bookmarks_count != 0").
+                    order("bookmarks_count desc, updated_at desc").
+                    page params[:page]
     end
 
     @current_user_books = current_user.books
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js   # index.js.erb
       format.xml  { render :xml => @books }
     end
   end
