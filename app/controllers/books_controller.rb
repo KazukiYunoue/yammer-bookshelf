@@ -37,7 +37,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @book }
+      format.xml  { render :xml => @book, :methods => [:title, :image_url] }
     end
   end
 

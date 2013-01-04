@@ -41,17 +41,14 @@ class Book < ActiveRecord::Base
     page ||= 1
 
     amazon_books = Amazon::Book.find_by_terms(terms, country, page.to_i)
-    p "amazon_books count is #{amazon_books.count}"
     amazon_books.each do |amazon_book|
       unless Book.find_by_asin(amazon_book.get("ASIN"))
         Book.create(:asin => amazon_book.get("ASIN"))
       end
 
-      p "amazon_book.get is #{amazon_book.get("ASIN")}"
       amazon_books_ASINs << amazon_book.get("ASIN")
     end
 
-    p "amazon_books_ASINs is #{amazon_books_ASINs}"
     return amazon_books_ASINs
   end
 end
