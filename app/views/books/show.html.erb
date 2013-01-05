@@ -1,23 +1,23 @@
 <div class="row-fluid">
   <div class="span3">
     <div class="thumbnail">
-      <div class="pics"><%= image_tag @book.image_url %></div>
+      <div class="books" id="<%= @book.id %>" title="image_url"></div>
     </div>
   </div>
 
   <div class="span9">
     <div class="well">
-      <h1><%= simple_format @book.title %></h1>
+      <h1><div class="books" id="<%= @book.id %>" title="title"></div></h1>
     </div>
     <% if @current_user_books.include? @book %>
       <%= button_to('I lost it.', bookmarks_path(:book_id => @book.id), :method => :delete, :class => "btn-danger") %>
     <% else %>
       <%= button_to('I have it!', bookmarks_path(:book_id => @book.id), :method => :post, :class => "btn-success") %>
     <% end %>
-    <h3><%= simple_format @book.author %></h3>
-    <h3><%= simple_format @book.label %></h3>
-    <h3><%= simple_format @book.formatted_price %></h3>
-    <h3><%= link_to "Amazon", @book.detail_page_url, :target=>["_blank"] %></h3>
+    <h3><div class="books" id="<%= @book.id %>" title="author"></div></h3>
+    <h3><div class="books" id="<%= @book.id %>" title="label"></div></h3>
+    <h3><div class="books" id="<%= @book.id %>" title="formatted_price"></div></h3>
+    <h3><div class="books" id="<%= @book.id %>" title="detail_page_url"></div></h3>
   </div>
 </div>
 
@@ -32,7 +32,7 @@
     <div class="well">
       <p>friends with this book</p>
       <% @users.each do |user| %>
-        <div class="pics"><%= link_to image_tag(user.image, :size => "50x50"), books_path(:user_id => user.id) %></div>
+        <%= link_to image_tag(user.image, :size => "50x50"), books_path(:user_id => user.id) %>
       <% end %>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <div class="hero-unit">
   <% if @user %>
-    <h1><div class="pics"><%= image_tag(@user.image, :size => "150x150") %>
-        <%= "#{@user.nickname}'s books" %></div></h1>
+    <h1><%= image_tag(@user.image, :size => "150x150") %>
+        <%= "#{@user.nickname}'s books" %></h1>
   <% else %>
     <h1><%= "All books" %></h1>
   <% end %>
@@ -19,7 +19,7 @@
       <div class="span3">
         <div class="well">
           <div class="thumbnail">
-            <div class="pics"><%= link_to image_tag(book.image_url), book %></div>
+            <div class="books" id="<%= book.id %>" title="image_url"></div>
           </div>
           <br />
           <% if @current_user_books.include? book %>

@@ -35,9 +35,12 @@ class BooksController < ApplicationController
 
     @current_user_books = current_user.books
 
+    res_methods = params[:res].split(",").map {|val| val.to_sym} if params[:res]
+
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @book, :methods => [:title, :image_url] }
+      format.xml  { render :xml => @book, :methods => res_methods }
+      format.json { render :json => @book, :methods => res_methods }
     end
   end
 

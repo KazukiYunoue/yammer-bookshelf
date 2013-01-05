@@ -55,7 +55,7 @@
               <li>
               <% if current_user %>
                 <%= link_to "Sign out.", signout_path %></li>
-                <li><div class="pics"><%= image_tag current_user.image, :size => "30x30" %></div></li>
+                <li><%= image_tag current_user.image, :size => "30x30" %></li>
               <% end %>
               <%= link_to image_tag("yammer_signin.png", :size =>"128x21"), "/auth/yammer" unless current_user %>
               </li>
