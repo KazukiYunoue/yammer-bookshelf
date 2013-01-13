@@ -6,7 +6,7 @@ class BooksController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @books = @user.books.page params[:page]
+      @books = @user.books.order("bookmarks.updated_at desc").page params[:page]
     elsif params[:terms]
       @books = Book.where(:asin => Book.find_by_terms_on_amazon(params[:terms], "jp", params[:page])).page params[:page]
     else
@@ -19,7 +19,6 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.js   # index.js.erb
       format.xml  { render :xml => @books }
     end
   end
