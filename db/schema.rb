@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20120616030354) do
 
   create_table "users", :force => true do |t|
     t.string   "provider"
-    t.string   "uid"
+    t.integer  "uid"
     t.string   "email"
     t.string   "full_name"
     t.string   "image"
