@@ -12,7 +12,6 @@ end
 group :production do
   gem 'pg'
   gem 'thin'
-  gem 'newrelic_rpm'
 end
 
 # Gems used only for assets and not required
@@ -39,6 +38,9 @@ gem 'amazon-ecs'
 
 # pagenation
 gem 'kaminari'
+
+# new relic
+gem 'newrelic_rpm'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
