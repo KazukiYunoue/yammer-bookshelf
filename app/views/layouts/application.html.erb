@@ -33,6 +33,10 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
+
+    <!-- For google analytics -->
+    <%= google_analytics(ENV["GOOGLE_ANALYTICS_CODE"]) %>
+
   </head>
   <body>
 

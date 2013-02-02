@@ -42,6 +42,9 @@ gem 'kaminari'
 # new relic
 gem 'newrelic_rpm'
 
+# google analytics
+gem 'dekiru'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
