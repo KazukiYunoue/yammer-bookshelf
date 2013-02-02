@@ -49,7 +49,6 @@
             <ul class="nav">
               <li><%= link_to "All books", books_path  %></li>
               <li><%= link_to "Your books", books_path(:user_id => current_user.id) if current_user %></li>
-              <li><%= link_to "About" %></li>
             </ul>
             <ul class="nav pull-right">
               <li>
